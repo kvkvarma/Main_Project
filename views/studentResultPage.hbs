@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <h2>BIO</h2>
+ {{#data}}
+    <p>Name:{{Name}}</p>
+    <p>Section:{{Branch}}</p>
+    <p>Year:{{Year}}</p>
+    <p>CGPA:{{CGPA}}</p>
+    <h2>last sem Results:</h2>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Marks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Maths</td>
+      <td>{{Maths}}</td>
+
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Physics</td>
+      <td>{{Physics}}</td>
+
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Chemistry</td>
+      <td>{{Chemistry}}</td>
+    </tr>
+  </tbody>
+</table>
+<script>
+  const queryUserName = data.Username
+</script>
+<form action="Qsubmit">
+  <input type="text" name="username" value={{RollNumber}} readonly>
+  <input type="text" name="desc">
+  <button type="submit">QSubmit</button>
+  {{#if msggg}}
+  <p>Query Submitted</p>
+  {{/if}}
+</form>
+{{/data}}
+</body>
+</html>

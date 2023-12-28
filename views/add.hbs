@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+    <form action="/addstudent"  >
+   <h3>ADD STUDENT</h3>
+    <hr>
+    <label for="name"><b>Student name</b></label>
+    <input type="text" placeholder="Enter Name" style="color:black;" name="name" id="name" required>
+
+    <label for="roll no"><b>Roll No</b></label>
+    <input type="text" placeholder="Enter RollNo" name="rollno" id="rollno" required>
+
+    <label for="password"><b>Temporary Password</b></label>
+    <input type="text" placeholder="Enter password" name="password" id="password" required>
+
+    <label for="year"><b>Year</b></label>
+    <input type="text" placeholder="Enter year" name="year" id="year" required>
+
+    <label for="branch"><b>Branch</b></label>
+    <input type="text" placeholder="Enter branch" name="branch" id="branch" required>
+
+   
+    <button type="submit" class="registerbtn">ADD STUDENT</button>
+
+    <button class="back-home" id="back">
+    <a href="./TeacherPage">&#8592;</a>
+    </button>
+    {{#if addmsg}}
+        <h3>Data Inserted</h3>
+    {{/if}}
+</form>
+</div>
+{{!-- <script>
+    const back = document.getElementById('back');
+    back.addEventListener("click",function(){
+        window.location.href="http://localhost:8005/index"
+    })
+</script> --}}
+</body>
+</html>
