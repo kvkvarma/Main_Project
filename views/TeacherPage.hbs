@@ -6,14 +6,59 @@
     <title>Document</title>
 </head>
 <body>
-    <button id="added"><a href="/add">Add Student</a></button>
-    <button id="searched"><a href="/search">Search Student</a></button>
-    <button id="updated"><a href="/update">Update Student</a></button>
-    <button id="deleted"> <a href="/delete">Delete Student</a></button>
-    <button id="viewed"><a href="/view">View Students`</a></button>
-    <p>Number of reports:10</p>
-    <label for="username">Roll Number:</label>
-    <input type="text" name="username" id="username" placeholder="Enter Rollno">
+    <button id="added">Add Student</button>
+    <button id="searched">Search Student</button>
+    <button id="updated">Update Student</button>
+    <button id="deleted">Delete Student</button>
+    <button id="alloted">Allot Marks</button>
+    <button id="viewed">View Students</button>
+    <button id="reported">Reports</button>
+
+    <script>
+        let addBtn = document.getElementById('added');
+        addBtn.addEventListener('click',function(){
+            window.location.href= '/add';
+        })
+
+        let searchBtn = document.getElementById('searched');
+        searchBtn.addEventListener('click',()=>{
+            window.location.href = '/search';
+        })
+
+        let updateBtn = document.getElementById('updated');
+        updateBtn.addEventListener('click',()=>{
+            window.location.href = '/update';
+        })
+
+        let deleteBtn = document.getElementById('deleted');
+        deleteBtn.addEventListener('click',()=>{
+            window.location.href = '/delete';
+        })
+
+        let allotMarksBtn = document.getElementById('alloted');
+        allotMarksBtn.addEventListener('click',()=>{
+            window.location.href = '/AllotMarks';
+        })
+
+        let viewBtn = document.getElementById('viewed');
+        viewBtn.addEventListener('click',()=>{
+            window.location.href = '/view';
+        })
+
+        let reportBtn = document.getElementById('reported');
+        reportBtn.addEventListener('click',()=>{
+            window.location.href = '/Report';
+        })
+    </script>
     <button >results</button>
+    <div class="btn">
+ <button class="back-home" id="back">Go to Home</button>
+  </div>
+  <script>
+    const back = document.getElementById('back');
+    back.addEventListener("click",function(){
+        window.location.href="/"
+    })
+</script>
 </body>
 </html>
