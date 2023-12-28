@@ -6,7 +6,40 @@
     <title>Document</title>
 </head>
 <body>
-    <p>HIII</p>
+
+    <form action="allotMarks-submit">
+        <label for="rollno">Roll Number</label>
+        <input type="text" name="roolno" id="roolno">
+        <button submit>submit</button>
+    </form>
+
+    {{#if allotmsg}}
+    <p>Allot Marks:</p>
+    <form action="marks-submit">
+    {{#data}}
+        <label for="roolno">Roll Number</label>
+        <input type="text" name="roolno" value={{RollNumber}} id="roolno" readonly>
+
+        <label for="maths">Maths</label>
+        <input type="number" name="maths" id="maths">
+
+        <label for="physics">Physics</label>
+        <input type="number" name="physics" id="physics">
+
+        <label for="chemistry">Chemistry</label>
+        <input type="number" name="chemistry" id="chemistry">
+
+        <label for="CGPA">CGPA</label>
+        <input type="number" name="CGPA" id="CGPA">
+
+        <button type="submit">submit</button>
+    {{/data}}
+    </form>
+    {{/if}}
+    {{#if MSmsg}}
+    <p>Successfully Inserted</p>
+    {{/if}}
+
     <div class="btn">
  <button class="back-home" id="back">&#8592;</button>
   </div>

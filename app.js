@@ -27,9 +27,7 @@ app.get("/update",(req,res)=>{
 app.get("/delete",(req,res)=>{
     res.render("delete");
 })
-// app.get("/Report",(req,res)=>{
-//     res.render('Report');
-// })
+
 app.get("/AllotMarks",(req,res)=>{
     res.render('AllotMarks')
 })
@@ -120,7 +118,7 @@ app.get("/searchstudent",(req,res)=>{
        }
        else{
           if(results.length>0){
-             res.render("search",{msg1:true})
+             res.render("search",{msg1:true,data:results});
           }
           else{
              res.render("search",{msg2:true})
@@ -183,6 +181,32 @@ app.get("/Report",(req,res)=>{
         }
         else{
             res.render('Report',{data:results,noOfQueries:results.length})
+        }
+    })
+})
+
+app.get('/allotMarks-submit',(req,res)=>{
+    const {roolno} = req.query;
+    let qry = "select Name,Year,Branch,RollNumber from student where RollNumber=?";
+    mysql.query(qry,[roolno],(err,results)=>{
+        if(err){
+            throw err;
+        }
+        else{
+            res.render('AllotMarks',{data:results,allotmsg:true})
+        }
+    })
+})
+
+app.get("/marks-submit",(req,res)=>{
+    const {maths,physics,chemistry,roolno,CGPA} = req.query;
+    let qry = "update student set Maths=?,Physics=?,Chemistry=?,CGPA=? where RollNumber= ?";
+    mysql.query(qry,[maths,physics,chemistry,CGPA,roolno],(err,results)=>{
+        if(err){
+            throw err;
+        }
+        else{
+            res.render('AllotMarks',{MSmsg:true});
         }
     })
 })

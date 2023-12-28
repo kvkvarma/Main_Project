@@ -21,9 +21,22 @@
      <button class="back-home" id="back">
     <a href="./TeacherPage">&#8592;</a>
     </button>
+
     {{#if msg1}}
+    {{#data}}
     <h3>student found</h3>
+    <p>Details of the student:</p>
+    <p>Name:{{Name}}</p>
+    <p>RollNumber:{{RollNumber}}</p>
+    
+    {{#if CGPA}}
+      <p>CGPA:{{CGPA}}</p>
+    {{else}}
+      <p>CGPA: <b>Marks need to be alloted</b></p>
     {{/if}}
+    {{/data}}
+    {{/if}}
+  
     {{#if msg2}}
     <h3>student not found</h3>
     {{/if}}
