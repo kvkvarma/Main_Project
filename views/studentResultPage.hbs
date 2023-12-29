@@ -4,19 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="./studentResultPage.css">
 </head>
 <body>
- <h2>BIO</h2>
+ <h2>Student Bio</h2>
  {{#data}}
-    <p>Name:{{Name}}</p>
-    <p>Section:{{Branch}}</p>
-    <p>Year:{{Year}}</p>
-    <p>CGPA:{{CGPA}}</p>
-    <h2>last sem Results:</h2>
-    <table class="table">
+ <div class="container">
+<div class="bio-table">
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th scope="row">Name</th>
+      <td>{{Name}}</td>
+
+    </tr>
+    <tr>
+      <th scope="row">Branch</th>
+      <td>{{Branch}}</td>
+
+    </tr>
+    <tr>
+       <th scope="row">Year</th>
+      <td>{{Year}}</td>
+    </tr>
+
+    <tr>
+       <th class="CGPA-row" scope="row">CGPA</th>
+      <td><b>{{CGPA}}</b></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<h2>Previous Semister Marks</h2>
+<div class="marks-table">
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">S.no</th>
       <th scope="col">Subject</th>
       <th scope="col">Marks</th>
     </tr>
@@ -35,23 +62,41 @@
 
     </tr>
     <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Chemistry</td>
+       <th scope="row">3</th>
+      <td>Chemistry</td>
       <td>{{Chemistry}}</td>
     </tr>
   </tbody>
 </table>
+</div>
+
+<div id="query-div">
+      <button id="query-btn">I want to report an Issue</button>
+</div>
 <script>
-  const queryUserName = data.Username
+  let queryCicked= document.getElementById('query-btn');
+  let queryDivClicked = document.getElementById('query-div');
+  queryCicked.addEventListener('click',()=>{
+    queryDivClicked.innerHTML = `<form  id="sub" action="Qsubmit">
+                 <input class="name-field" type="text" id="username" name="username" value={{RollNumber}} readonly>
+              <textarea placeholder=" Enter your Query here" name="desc" id="desc" cols="40" rows="3"></textarea>  
+              <button type="submit" id="subBtn">QSubmit</button>
+</form>`
+  })
 </script>
-<form action="Qsubmit">
-  <input type="text" name="username" value={{RollNumber}} readonly>
-  <input type="text" name="desc">
-  <button type="submit">QSubmit</button>
-  {{#if msggg}}
-  <p>Query Submitted</p>
-  {{/if}}
-</form>
 {{/data}}
+
+{{#if msggg}}
+    <div id="tempMsg">
+      <h6>SORRY! Your doubts will be verified... </h6>
+      </div>
+    <script>
+        var tempMsg = document.getElementById('tempMsg');
+        setTimeout(function () {
+            tempMsg.style.display = 'none';
+        }, 1000);
+    </script>
+{{/if}}
+
 </body>
 </html>

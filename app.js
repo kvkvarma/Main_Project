@@ -42,7 +42,6 @@ app.post("/student-submit",(req,res)=>{
         }
         else{
             if(results.length>0){
-                console.log(results);
                 res.render('studentResultPage',{data:results})
             }
             else{
@@ -51,6 +50,7 @@ app.post("/student-submit",(req,res)=>{
         }
     })
 })
+
 app.get("/Qsubmit",(req,res)=>{
     const {username,desc} = req.query;
     let qry = "update student set Queries = ? where RollNumber =?";
@@ -59,11 +59,18 @@ app.get("/Qsubmit",(req,res)=>{
             throw err;
         }
         else{
-            res.render('QueryDone')
+            let qry = "select * from student where RollNumber =?";
+            mysql.query(qry,[username],(err,results)=>{
+                if(err){
+                    throw err;
+                }
+                else{
+                    res.render('studentResultPage',{data:results,msggg:true})
+                }
+            })   
         }
     })
 })
-
 
 app.post("/teacher-submit",(req,res)=>{
     const username = req.body.username;

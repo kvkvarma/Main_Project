@@ -4,70 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Login</title>
-    <link rel="stylesheet" href="./style.css">
-
+    <link rel="stylesheet" href="./Homepage.css">
+    {{!-- <link rel="stylesheet" href="style.css"> --}}
 </head>
 <body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <h1>Student - Teacher Portal</h1>
     <div class="container">
         <div class="form-class1">
-            {{!-- <img class='homepage-img'src="student-with-graduation-cap.png" alt="student"> --}}
+            <form method="post" action="student-submit" class="student-form">
             <h2>Student Login</h2>
-            <form method="post" action="student-submit">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" placeholder="Enter Username">
+                <label class="top-input" for="username">Roll Num: <input type="text" name="username" id="username" placeholder=" Enter Username"></label>
                 <br>
-                <label for="password">Password:</label>
-                <input type="password" placeholder="Enter Password" name="password" id="password">
-                <button type="submit">Login</button>
+                <label for="password">Password: <input type="password" placeholder=" Enter Password" name="password" id="password"></label>
+                <br>
+            {{#if msg}}
+                <div id="tempMsg">hiii</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
+            {{/if}}
+                <button class="login-btn" type="submit">Login</button>
             </form>
-              {{#if msg}}
-            <div id="tempMsg">
-                <h2>Wrong Details</h2>
-            </div>
-            <script>
-                var wrongDetailsMessage = document.getElementById('wrongDetailsMessage');
-                setTimeout(function () {
-                    tempMsg.style.display = 'none';
-                }, 2000); 
-            </script>
-        {{/if}}
         </div>
-
-
         <div class="form-class2">
-            {{!-- <img class='homepage-img'src="teacher-icon.png" alt="teacher"> --}}
-            <h2>Teacher Login</h2>
-            <form method="post" action="teacher-submit">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" placeholder="Enter Username">
+            <form method="post" action="teacher-submit" class="teacher-form">
+                <h2>Teacher Login</h2>
+                <label class="top-input" for="teacher-username">Username: <input type="text" name="teacher-username" id="teacher-username" placeholder=" Enter Username"> </label>
                 <br>
-                <label  for="Password">Password:</label>
-                <input type="password" placeholder="Enter Password" name="password" id="password">
-                <button type="submit">Login</button>
-               {{#if msgg}}
-            <div id="tempMsg">
-                <h2>Invalid Details</h2>
-            </div>
-            <script>
-                var wrongDetailsMessage = document.getElementById('wrongDetailsMessage');
-                setTimeout(function () {
-                    tempMsg.style.display = 'none';
-                }, 2000); 
-            </script>
-        {{/if}}
+                <label for="teacher-password">Password: <input type="password" placeholder=" Enter Password" name="teacher-password" id="teacher-password"></label>
+                <br>
+                <button  class="login-btn" type="submit">Login</button>
+                {{#if msgg}}
+                    <div id="tempMsg">
+                        <h2>Invalid Details</h2>
+                    </div>
+                    <script>
+                        var tempMsg = document.getElementById('tempMsg');
+                        setTimeout(function () {
+                            tempMsg.style.display = 'none';
+                        }, 2000);
+                    </script>
+                {{/if}}
             </form>
         </div>
     </div>
-</body>
-</html>
 </body>
 </html>
