@@ -9,6 +9,13 @@
 </head>
 <body>
  <h2>Student Bio</h2>
+ <button id="back">&#8592;</button>
+ <script>
+    const back = document.getElementById('back');
+    back.addEventListener("click",function(){
+        window.location.href="/"
+    })
+</script>
  {{#data}}
  <div class="container">
 <div class="bio-table">
@@ -80,7 +87,7 @@
     queryDivClicked.innerHTML = `<form  id="sub" action="Qsubmit">
                  <input class="name-field" type="text" id="username" name="username" value={{RollNumber}} readonly>
               <textarea placeholder=" Enter your Query here" name="desc" id="desc" cols="40" rows="3"></textarea>  
-              <button type="submit" id="subBtn">QSubmit</button>
+              <button type="submit" id="subBtn">Post Query</button>
 </form>`
   })
 </script>
@@ -88,7 +95,7 @@
 
 {{#if msggg}}
     <div id="tempMsg">
-      <h6>SORRY! Your doubts will be verified... </h6>
+      <h6>Sorry! Your doubts will be verified... </h6>
       </div>
     <script>
         var tempMsg = document.getElementById('tempMsg');
@@ -97,6 +104,7 @@
         }, 1000);
     </script>
 {{/if}}
+
 
 </body>
 </html>

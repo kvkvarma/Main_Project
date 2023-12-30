@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./TeacherPage.css">
 </head>
-<body>
-    <button id="added">Add Student</button>
-    <button id="searched">Search Student</button>
-    <button id="updated">Update Student</button>
-    <button id="deleted">Delete Student</button>
-    <button id="alloted">Allot Marks</button>
-    <button id="viewed">View Students</button>
-    <button id="reported">Reports</button>
-
+<body id="body">
+    <nav>
+        <button class="back-home" id="back">Exit</button>
+        <h2>Teacher Changable Page...</h2>
+        <h3 class="name">jay</h3>
+    </nav>
+    <div class="buttons">
+        <button id="added">Add Student</button>
+        <button  id="searched">Search Student</button>
+        <button  id="updated">Update Student</button>
+        <button  id="deleted">Delete Student</button>
+        <button  id="alloted">Allot Marks</button>
+        <button  id="viewed">View Students</button>
+        <button  id="reported">Reports</button>
+    </div>
     <script>
         let addBtn = document.getElementById('added');
         addBtn.addEventListener('click',function(){
@@ -51,7 +58,7 @@
         })
     </script>
     <div class="btn">
- <button class="back-home" id="back">Go to Home</button>
+ {{!-- <button class="back-home" id="back">Go to Home</button> --}}
   </div>
   <script>
     const back = document.getElementById('back');

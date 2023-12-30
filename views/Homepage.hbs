@@ -18,7 +18,7 @@
                 <label for="password">Password: <input type="password" placeholder=" Enter Password" name="password" id="password"></label>
                 <br>
             {{#if msg}}
-                <div id="tempMsg">hiii</div>
+                <div id="tempMsg">Invalid Details</div>
                 <script>
                     var tempMsg = document.getElementById('tempMsg');
                     setTimeout(function () {
@@ -32,22 +32,22 @@
         <div class="form-class2">
             <form method="post" action="teacher-submit" class="teacher-form">
                 <h2>Teacher Login</h2>
-                <label class="top-input" for="teacher-username">Username: <input type="text" name="teacher-username" id="teacher-username" placeholder=" Enter Username"> </label>
+                <label class="top-input" for="username">Username: <input type="text" name="username" id="username" placeholder=" Enter Username"> </label>
                 <br>
-                <label for="teacher-password">Password: <input type="password" placeholder=" Enter Password" name="teacher-password" id="teacher-password"></label>
+                <label for="password">Password: <input type="password" placeholder=" Enter Password" name="password" id="password"></label>
                 <br>
-                <button  class="login-btn" type="submit">Login</button>
                 {{#if msgg}}
                     <div id="tempMsg">
-                        <h2>Invalid Details</h2>
+                        <p>Invalid Details</p>
                     </div>
                     <script>
                         var tempMsg = document.getElementById('tempMsg');
                         setTimeout(function () {
                             tempMsg.style.display = 'none';
-                        }, 2000);
+                        }, 1000);
                     </script>
                 {{/if}}
+                <button  class="login-btn" type="submit">Login</button>
             </form>
         </div>
     </div>
