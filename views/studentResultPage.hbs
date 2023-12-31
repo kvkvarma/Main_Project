@@ -45,6 +45,25 @@
 </div>
 </div>
 
+<form id="formmm" action="clickedDone">
+    <label for="number">RollNumber: <input class="number-field" type="text" name="number" value="{{RollNumber}}" id="number"></label>
+    <p>Select Semester: </p>
+    <select class="select" name="sem">
+      <option value="semester">Semester 1</option>
+      <option value="semester2">Semester 2</option>
+      <option value="semester3">Semester 3</option>
+      <option value="semester4">Semester 4</option>
+      <option value="semester5">Semester 5</option>
+      <option value="semester6">Semester 6</option>
+      <option value="semester7">Semester 7</option>
+      <option value="semester8">Semester 8</option>
+    </select>
+    <button class="subBtn" type="submit">Submit</button>
+  </form> 
+{{/data}}
+
+{{#if msg}}
+{{#marksData}}
 <h2>Previous Semister Marks</h2>
 <div class="marks-table">
 <table class="table table-bordered">
@@ -76,6 +95,10 @@
   </tbody>
 </table>
 </div>
+{{/marksData}}
+{{/if}}
+
+{{#marksData}}
 
 <div id="query-div">
       <button id="query-btn">I want to report an Issue</button>
@@ -85,13 +108,15 @@
   let queryDivClicked = document.getElementById('query-div');
   queryCicked.addEventListener('click',()=>{
     queryDivClicked.innerHTML = `<form  id="sub" action="Qsubmit">
-                 <input class="name-field" type="text" id="username" name="username" value={{RollNumber}} readonly>
+                <label class="labelName">Roll No:<input class="text_field" type="text" id="username" name="username" value="{{RollNumber}}" readonly> </label>
+                 
               <textarea placeholder=" Enter your Query here" name="desc" id="desc" cols="40" rows="3"></textarea>  
-              <button type="submit" id="subBtn">Post Query</button>
+              <button type="submit" class="buttonSubmit" >Post Query</button>
 </form>`
   })
 </script>
-{{/data}}
+
+{{/marksData}}
 
 {{#if msggg}}
     <div id="tempMsg">

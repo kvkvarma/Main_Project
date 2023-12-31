@@ -15,6 +15,9 @@ app.get("/studentResultPage",(req,res)=>{
 app.get("/TeacherPage",(req,res)=>{
     res.render("TeacherPage");
 })
+app.get("/temp",(req,res)=>{
+    res.render("temp");
+})
 app.get("/add",(req,res)=>{
     res.render("add");
 })
@@ -181,7 +184,7 @@ app.get('/view',(req,res)=>{
 })
 
 app.get("/Report",(req,res)=>{
-    let qry = 'select * from student where Queries IS NOT NULL';
+    let qry = "select * from student where Queries != ' '"
     mysql.query(qry,(err,results)=>{
         if(err){
             throw err;
@@ -218,6 +221,28 @@ app.get("/marks-submit",(req,res)=>{
     })
 })
 
+app.get('/clickedDone',(req,res)=>{
+    const {number,sem} = req.query;
+    const semName = mysql.escapeId(sem);
+    let qry = `select ${semName}.RollNumber, ${semName}.Maths,${semName}.Physics,${semName}.Chemistry from ${semName} INNER JOIN student ON ${semName}.RollNumber = ?`;
+    mysql.query(qry,[number],(err,results)=>{
+        if(err){
+            throw err;
+        }
+        else{
+            let qry1 = "select * from student where RollNumber = ?";
+            mysql.query(qry1,[number],(err,details)=>{
+                if(err){
+                    throw err;
+                }
+                else{
+                    res.render('studentResultPage',{data:details,marksData:results,msg:true});
+                }
+            })
+        }
+    })
+})      
+
 app.listen(port,(err)=>{
     if(err){
         throw err;
@@ -226,3 +251,4 @@ app.listen(port,(err)=>{
         console.log("Server running succesfully")
     }
 })
+

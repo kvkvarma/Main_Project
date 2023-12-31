@@ -14,17 +14,15 @@ h3{
     justify-content: center;
 }
 .bio-table{
-    margin-top: 10px;
     width: 500px;
 }
 .marks-table{
-    margin-top: 20px;
     margin-left: 40px;
     margin-right: 40px;
 }
 h2{
     text-align: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .CGPA-row{
     background-color:rgb(170, 170, 0)
@@ -46,21 +44,6 @@ h6{
     color: maroon;
     font-family:Arial, Helvetica, sans-serif
 }
-.name-field{
-    width:20px;
-    margin-right: 3px;
-    margin-top: 22px;
-    float:left;
-}
-#desc{
-    margin-bottom: -33px;
-}
-#subBtn{
-    background-color: green;
-    color:white;
-    border: none;
-    border-radius: 3px;
-}
 
 #back{
    position: absolute;
@@ -71,4 +54,50 @@ h6{
    border:none;
    width:40px;
    border-radius: 1px; 
+}
+#formmm{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+#formm input{
+    width: 20px;
+}
+.number-field{
+    width: 20px;
+    height:25px;
+    margin-right: 10px;
+}
+.select{
+    height:26px;
+    margin-left: 5px;
+    margin-right: 10px;
+    background-color: rgb(235, 235, 235);
+}
+.subBtn{
+    border: none;
+    color:white;
+    background-color: green;
+    height: 30px;
+    border-radius: 3px;
+    margin-top: -2px;
+}
+#sub{
+    display: flex;
+}
+.text_field{
+    height:30px;
+    width: 20px;
+    margin-right: 5px;
+    margin-top: 25px;
+    margin-left: 4px;
+}
+.buttonSubmit{
+    height: 30px;
+    margin-top: 25px;
+    margin-left: 5px;
+    background-color: green;
+    color:white;
+    border: none;
+    border-radius: 3px;
 }
