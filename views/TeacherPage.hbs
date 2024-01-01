@@ -8,9 +8,9 @@
 </head>
 <body id="body">
     <nav>
-        <button class="back-home" id="back">Exit</button>
-        <h2>Teacher Changable Page...</h2>
-        <h3 class="name">jay</h3>
+        <p>Hello User !</p>
+        <h2>Teacher Edit Page...</h2>
+        <button id="logOut">Log Out</button>
     </nav>
     <div class="buttons">
         <button id="added">Add Student</button>
@@ -22,6 +22,11 @@
         <button  id="reported">Reports</button>
     </div>
     <script>
+        let logoutBtn =document.getElementById('logOut');
+        logoutBtn.addEventListener('click',()=>{
+            window.location.href = '/'
+        })
+
         let addBtn = document.getElementById('added');
         addBtn.addEventListener('click',function(){
             window.location.href= '/add';

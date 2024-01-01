@@ -27,6 +27,11 @@
 
     </tr>
     <tr>
+      <th scope="row">Roll Number</th>
+      <td>{{RollNumber}}</td>
+
+    </tr>
+    <tr>
       <th scope="row">Branch</th>
       <td>{{Branch}}</td>
 
@@ -36,17 +41,13 @@
       <td>{{Year}}</td>
     </tr>
 
-    <tr>
-       <th class="CGPA-row" scope="row">CGPA</th>
-      <td><b>{{CGPA}}</b></td>
-    </tr>
   </tbody>
 </table>
 </div>
 </div>
 
 <form id="formmm" action="clickedDone">
-    <label for="number">RollNumber: <input class="number-field" type="text" name="number" value="{{RollNumber}}" id="number"></label>
+    <input class="number-field" type="hidden" name="number" value="{{RollNumber}}" id="number">
     <p>Select Semester: </p>
     <select class="select" name="sem">
       <option value="semester">Semester 1</option>
@@ -65,6 +66,7 @@
 {{#if msg}}
 {{#marksData}}
 <h2>Previous Semister Marks</h2>
+<p>CGPA:{{CGPA}}</p>
 <div class="marks-table">
 <table class="table table-bordered">
   <thead>
@@ -99,7 +101,6 @@
 {{/if}}
 
 {{#marksData}}
-
 <div id="query-div">
       <button id="query-btn">I want to report an Issue</button>
 </div>
@@ -108,14 +109,13 @@
   let queryDivClicked = document.getElementById('query-div');
   queryCicked.addEventListener('click',()=>{
     queryDivClicked.innerHTML = `<form  id="sub" action="Qsubmit">
-                <label class="labelName">Roll No:<input class="text_field" type="text" id="username" name="username" value="{{RollNumber}}" readonly> </label>
+            <input class="text_field" type="hidden" id="username" name="username" value="{{RollNumber}}" readonly>
                  
-              <textarea placeholder=" Enter your Query here" name="desc" id="desc" cols="40" rows="3"></textarea>  
+              <textarea placeholder=" Enter your Query here" name="desc" id="desc" cols="40" rows="2"></textarea>  
               <button type="submit" class="buttonSubmit" >Post Query</button>
 </form>`
   })
 </script>
-
 {{/marksData}}
 
 {{#if msggg}}

@@ -8,7 +8,7 @@
 <body>
 
    <form action="allotMarks-submit">
-    <label for="number">RollNumber: <input class="number-field" type="text" name="number" id="number"></label>
+    <label for="number">RollNumber: <input class="number-field" type="text" name="roolno" id="roolno"></label>
     <p>Select Semester: </p>
     <select class="select" name="sem">
       <option value="semester">Semester 1</option>
@@ -26,10 +26,9 @@
     {{#if allotmsg}}
     <p>Allot Marks:</p>
     <form action="marks-submit">
+      <input type="hidden" name="sem" id="sem" value="{{semister}}">
     {{#data}}
-        <label for="roolno">Roll Number</label>
-        <input type="text" name="roolno" value={{RollNumber}} id="roolno" readonly>
-
+        <input type="hidden" name="roolno" value={{RollNumber}} id="roolno" readonly>
         <label for="maths">Maths</label>
         <input type="number" name="maths" id="maths">
 
@@ -45,6 +44,7 @@
         <button type="submit">submit</button>
     {{/data}}
     </form>
+
     {{/if}}
     {{#if MSmsg}}
     <p>Successfully Inserted</p>

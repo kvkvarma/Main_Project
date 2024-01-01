@@ -1,0 +1,25 @@
+th{
+    text-align: center;
+}
+td{
+    text-align: center;
+}
+thead{
+    background-color: gray;
+}
+.view-table{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+h2{
+    margin-top: 44vh;
+    text-align: center;
+}
+#back{
+    float: left;
+    margin-top: -330px;
+    background-color: maroon;
+    border: none;
+    color:white;
+    border-radius: 4px;
+}

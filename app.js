@@ -9,6 +9,7 @@ app.use(express.static(__dirname+"/public"));
 app.get("/",(req,res)=>{
     res.render("Homepage");
  })
+
 app.get("/studentResultPage",(req,res)=>{
     res.render("studentResultPage");
 })
@@ -30,7 +31,9 @@ app.get("/update",(req,res)=>{
 app.get("/delete",(req,res)=>{
     res.render("delete");
 })
-
+app.get('/view',(req,res)=>{
+    res.render('view');
+})
 app.get("/AllotMarks",(req,res)=>{
     res.render('AllotMarks')
 })
@@ -54,6 +57,28 @@ app.post("/student-submit",(req,res)=>{
     })
 })
 
+app.get('/clickedDone',(req,res)=>{
+    const {number,sem} = req.query;
+    const semName = mysql.escapeId(sem);
+    let qry = `select ${semName}.RollNumber, ${semName}.Maths,${semName}.CGPA,${semName}.Physics,${semName}.Chemistry from ${semName} INNER JOIN student ON ${semName}.RollNumber = ?`;
+    mysql.query(qry,[number],(err,results)=>{
+        if(err){
+            throw err;
+        }
+        else{
+            let qry1 = "select * from student where RollNumber = ?";
+            mysql.query(qry1,[number],(err,details)=>{
+                if(err){
+                    throw err;
+                }
+                else{
+                    res.render('studentResultPage',{data:details,marksData:results,msg:true});
+                }
+            })
+        }
+    })
+})  
+
 app.get("/Qsubmit",(req,res)=>{
     const {username,desc} = req.query;
     let qry = "update student set Queries = ? where RollNumber =?";
@@ -68,7 +93,7 @@ app.get("/Qsubmit",(req,res)=>{
                     throw err;
                 }
                 else{
-                    res.render('studentResultPage',{data:results,msggg:true})
+                    res.render('studentResultPage',{data:results,msggg:true,msg:true})
                 }
             })   
         }
@@ -85,7 +110,7 @@ app.post("/teacher-submit",(req,res)=>{
         }
         else {
             if(results.length>0){   
-                res.render("TeacherPage")
+                res.render("TeacherPage",{data:results})
             }
             else{
                 res.render('Homepage',{msgg:true});
@@ -101,20 +126,47 @@ app.get("/addstudent", (req, res) => {
           if (err) {
             throw err;
           } else {
-            res.render('add',{addmsg:true});
-          }
-        });
+            const semesterTables = ['semester', 'semester2','semester3','semester4','semester5','semester6','semester7','semester8'];
+            semesterTables.forEach((table,index)=>{
+                let qry1 = `insert into ${table} (RollNumber) values (?)`  ;
+                mysql.query(qry1,[rollno],(err,results)=>{
+                    if(err){
+                        throw err;
+                    }
+                    else{
+                        if(index === semesterTables.length-1){
+                            res.render('add',{addmsg:true})
+                        }
+                    }
+                })
+            })
+        }
+    });
 });
       
 app.get("/removestudent",(req,res)=>{
     const {rollno} = req.query;
     let qry = 'delete from student where RollNumber = ?';
+
     mysql.query(qry,[rollno],(err,results)=>{
         if(err){
             throw err;
         }
         else{
-            res.render('TeacherPage',{dmsg1:true});
+            const semesterTables = ['semester', 'semester2','semester3','semester4','semester5','semester6','semester7','semester8'];
+            semesterTables.forEach((table,index)=>{
+                let qry1 = `delete  from ${table} where RollNumber = ?`;
+                mysql.query(qry1,[rollno],(err,res1)=>{
+                    if(err){
+                        throw err;
+                    }
+                    else{  
+                        if(index === semesterTables.length-1){
+                            res.render('delete',{dmsg1:true});
+                        }
+                    }
+                })
+            })
         }
     })
 })
@@ -155,7 +207,6 @@ app.get("/searchstudent",(req,res)=>{
     })
  })
 
-
  app.get("/updatestudent",(req,res)=>{
     const {name,rollno} = req.query;
     let qry = "update student set Name=?,Queries=NULL where RollNumber = ?";
@@ -171,14 +222,15 @@ app.get("/searchstudent",(req,res)=>{
     })
  });
 
-app.get('/view',(req,res)=>{
-    let qry = 'select * from student order by RollNumber asc';
-    mysql.query(qry,(err,results)=>{
+app.get('/viewClicked',(req,res)=>{
+    const{year,branch} = req.query;
+    let qry = 'select * from student where Year=? and Branch=? order by RollNumber asc';
+    mysql.query(qry,[year,branch],(err,results)=>{
         if(err){
             throw err;
         }
         else{
-            res.render('view',{data:results});
+            res.render('view',{data:results,msg:true});
         }
     })
 })
@@ -190,28 +242,33 @@ app.get("/Report",(req,res)=>{
             throw err;
         }
         else{
-            res.render('Report',{data:results,noOfQueries:results.length})
+           if(results.length>0){
+            res.render('Report',{data:results,noOfQueries:results.length,msg:true})
+           }
+           else{
+            res.render('Report',{data:results,noOfQueries:results.length,msg:false})
+           }
         }
     })
 })
 
 app.get('/allotMarks-submit',(req,res)=>{
-    const {roolno} = req.query;
+    const {roolno,sem} = req.query;
     let qry = "select Name,Year,Branch,RollNumber from student where RollNumber=?";
     mysql.query(qry,[roolno],(err,results)=>{
         if(err){
             throw err;
         }
         else{
-            res.render('AllotMarks',{data:results,allotmsg:true})
+            res.render('AllotMarks',{data:results,allotmsg:true,semister:sem})
         }
     })
 })
 
 app.get("/marks-submit",(req,res)=>{
-    const {maths,physics,chemistry,roolno,CGPA} = req.query;
-    let qry = "update student set Maths=?,Physics=?,Chemistry=?,CGPA=? where RollNumber= ?";
-    mysql.query(qry,[maths,physics,chemistry,CGPA,roolno],(err,results)=>{
+    const {maths,physics,chemistry,roolno,sem,CGPA} = req.query;
+    let qry = "update ?? set Maths=?,Physics=?,Chemistry=?,CGPA=? where RollNumber= ?";
+    mysql.query(qry,[sem,maths,physics,chemistry,CGPA,roolno],(err,results)=>{
         if(err){
             throw err;
         }
@@ -219,29 +276,7 @@ app.get("/marks-submit",(req,res)=>{
             res.render('AllotMarks',{MSmsg:true});
         }
     })
-})
-
-app.get('/clickedDone',(req,res)=>{
-    const {number,sem} = req.query;
-    const semName = mysql.escapeId(sem);
-    let qry = `select ${semName}.RollNumber, ${semName}.Maths,${semName}.Physics,${semName}.Chemistry from ${semName} INNER JOIN student ON ${semName}.RollNumber = ?`;
-    mysql.query(qry,[number],(err,results)=>{
-        if(err){
-            throw err;
-        }
-        else{
-            let qry1 = "select * from student where RollNumber = ?";
-            mysql.query(qry1,[number],(err,details)=>{
-                if(err){
-                    throw err;
-                }
-                else{
-                    res.render('studentResultPage',{data:details,marksData:results,msg:true});
-                }
-            })
-        }
-    })
-})      
+})    
 
 app.listen(port,(err)=>{
     if(err){
