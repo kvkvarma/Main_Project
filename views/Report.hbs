@@ -9,7 +9,9 @@
 </head>
 <body>
 {{#if msg}}
-<div id="div">Number of Reports:{{noOfQueries}}</div>
+<div class="number-div">
+<p class="number">Number Of Queries: {{noOfQueries}}</p>
+</div>
 <div class="view-table">
 <table class="table table-bordered">
   <thead>
@@ -28,8 +30,8 @@
       <td>{{Queries}}</td>
       <td>{{Year}}</td>
       <td>{{Branch}}</td>
-      <td><button id="edit">Edit Details</button></td>
-      <td><button id="editMarks">Edit Marks</button></td>
+      <td><button type="submit" id="edit" value={{RollNumber}}>Edit Details</button></td>
+      <td><button id="editMarks" value={{RollNumber}}>Edit Marks</button></td>
     </tr>
     {{/data}}
   </tbody>
@@ -43,6 +45,11 @@
         let editBtn = document.getElementById('edit');
         editBtn.addEventListener('click',()=>{
             window.location.href = "/update"
+        })
+
+        let editMarksBtn = document.getElementById('editMarks');
+        editMarksBtn.addEventListener('click',()=>{
+            window.location.href = "/AllotMarks"
         })
 
     </script>

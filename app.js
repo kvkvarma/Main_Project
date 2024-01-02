@@ -13,9 +13,11 @@ app.get("/",(req,res)=>{
 app.get("/studentResultPage",(req,res)=>{
     res.render("studentResultPage");
 })
+
 app.get("/TeacherPage",(req,res)=>{
     res.render("TeacherPage");
 })
+
 app.get("/temp",(req,res)=>{
     res.render("temp");
 })
@@ -60,9 +62,9 @@ app.post("/student-submit",(req,res)=>{
 app.get('/clickedDone',(req,res)=>{
     const {number,sem} = req.query;
     const semName = mysql.escapeId(sem);
-    let qry = `select ${semName}.RollNumber, ${semName}.Maths,${semName}.CGPA,${semName}.Physics,${semName}.Chemistry from ${semName} INNER JOIN student ON ${semName}.RollNumber = ?`;
+    let qry = `select ${semName}.RollNumber, ${semName}.Maths,${semName}.CGPA,${semName}.Physics,${semName}.Chemistry from ${semName} INNER JOIN student ON ${semName}.RollNumber = ? LIMIT 1`;
     mysql.query(qry,[number],(err,results)=>{
-        if(err){
+        if(err){    
             throw err;
         }
         else{
@@ -267,7 +269,7 @@ app.get('/allotMarks-submit',(req,res)=>{
 
 app.get("/marks-submit",(req,res)=>{
     const {maths,physics,chemistry,roolno,sem,CGPA} = req.query;
-    let qry = "update ?? set Maths=?,Physics=?,Chemistry=?,CGPA=? where RollNumber= ?";
+    let qry = "update ?? set Maths=?,Physics=?,Chemistry=?,CGPA=? where RollNumber= ? ";
     mysql.query(qry,[sem,maths,physics,chemistry,CGPA,roolno],(err,results)=>{
         if(err){
             throw err;
@@ -286,4 +288,3 @@ app.listen(port,(err)=>{
         console.log("Server running succesfully")
     }
 })
-
