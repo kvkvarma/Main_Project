@@ -1,5 +1,13 @@
 const express = require("express");
 const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.setHeader('Expires', '-1');
+    res.setHeader('Pragma', 'no-cache');
+    next();
+  });
 const port = 8000;
 const mysql = require("./connection").con; 
 app.set('view engine',"hbs");
@@ -40,24 +48,24 @@ app.get("/AllotMarks",(req,res)=>{
     res.render('AllotMarks')
 })
  
-app.post("/student-submit",(req,res)=>{
+app.post("/student-submit", (req, res) => {
     const username = req.body.username;
-   const password = req.body.password; 
+    const password = req.body.password;
     let qry = "select * from student where RollNumber=? and Password=?";
-    mysql.query(qry,[username,password],(err,results)=>{
-        if(err){
+    mysql.query(qry, [username, password], (err, results) => {
+        if (err) {
             throw err;
-        }
-        else{
-            if(results.length>0){
-                res.render('studentResultPage',{data:results})
+        } else {
+            if (results.length > 0) {
+
+                res.render('studentResultPage', { data: results });
+            } else {
+                res.render('Homepage', { msg: true });
             }
-            else{
-                res.render('Homepage',{msg:true});
-            }
         }
-    })
-})
+    });
+});
+
 
 app.get('/clickedDone',(req,res)=>{
     const {number,sem} = req.query;
@@ -121,8 +129,8 @@ app.post("/teacher-submit",(req,res)=>{
     })
 })
 
-app.get("/addstudent", (req, res) => {
-        const { name, rollno, password, year, branch } = req.query;
+app.post("/addstudent", (req, res) => {
+        const { name, rollno, password, year, branch } = req.body;
         let qry = 'INSERT INTO student (Name, RollNumber, Password, Year, Branch) VALUES (?, ?, ?, ?, ?)';
         mysql.query(qry, [name, rollno, password, year, branch], (err, results) => {
           if (err) {
@@ -146,8 +154,8 @@ app.get("/addstudent", (req, res) => {
     });
 });
       
-app.get("/removestudent",(req,res)=>{
-    const {rollno} = req.query;
+app.post("/removestudent",(req,res)=>{
+    const {rollno} = req.body;
     let qry = 'delete from student where RollNumber = ?';
 
     mysql.query(qry,[rollno],(err,results)=>{

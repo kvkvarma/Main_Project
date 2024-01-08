@@ -6,38 +6,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add</title>
-    <link rel="stylesheet" href="style.css">
+    {{!-- <link rel="stylesheet" href="style.css"> --}}
+    <link rel="stylesheet" href="./add.css">
     
 </head>
 <body>
-    <img src="../images/skjdn.jpg" alt="image">
+    <button class="back-home" id="back">&#8592;</button>
+    <script>
+        const backBtn = document.getElementById('back');
+        backBtn.addEventListener('click',()=>{
+            window.location.href='./TeacherPage'
+        })
+    </script>
     <div class="container">
-    <form action="/addstudent"  >
+    <form method="post" action="/addstudent"  >
    <h3>ADD STUDENT</h3>
-    <hr>
-    <label for="name"><b>Student name</b></label>
+    <label for="name"><b>Student name:</b></label>
     <input type="text" placeholder="Enter Name" style="color:black;" name="name" id="name" required>
-
-    <label for="roll no"><b>Roll No</b></label>
+    <br>
+    <label for="roll no"><b>Roll No:</b></label>
     <input type="text" placeholder="Enter RollNo" name="rollno" id="rollno" required>
-
-    <label for="password"><b>Temporary Password</b></label>
+<br>
+    <label for="password"><b>Temporary Password:</b></label>
     <input type="text" placeholder="Enter password" name="password" id="password" required>
-
-    <label for="year"><b>Year</b></label>
-    <input type="text" placeholder="Enter year" name="year" id="year" required>
-
-    <label for="branch"><b>Branch</b></label>
+<br>
+    <label for="year"><b>Year:</b></label>
+    <select class="select" name="year">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      
+    </select>
+<br>
+    <label for="branch"><b>Branch:</b></label>
     <input type="text" placeholder="Enter branch" name="branch" id="branch" required>
-
-   
-    <button type="submit" class="registerbtn">ADD STUDENT</button>
-
-    <button class="back-home" id="back">
-    <a href="./TeacherPage">&#8592;</a>
-    </button>
+<br>
+    <button type="submit" id="registerbtn">ADD STUDENT</button>
+<br>
     {{#if addmsg}}
         <h3>Data Inserted</h3>
+    
     {{/if}}
 </form>
 </div>
