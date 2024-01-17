@@ -5,34 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="delete.css">
 </head>
 <body>
+     <button class="back-home" id="back">&#8592;</button>
+     <script>
+      const backBtn = document.getElementById('back');
+        backBtn.addEventListener('click',()=>{
+            window.location.href='./TeacherPage'
+        })
+     </script>
     <div class="container">
-      <form method="post" action="/removestudent">
-   <h3>SEARCH STUDENT</h3>
+      <form action="/removestudent">
+   <h3 style="color: rgb(16, 18, 161);"> DELETE STUDENT</h3>
     <hr>
  <label for="rollno"><b>Roll No</b></label>
     <input type="text" placeholder="Enter Rollno To Delete" name="rollno" id="rollno" required>
 
     <button type="submit" class="registerbtn">DELETE STUDENT</button>
-     <button class="back-home" id="back">
-    <a href="./TeacherPage">&#8592;</a>
-    </button>
     {{#if dmsg1}}
-    <h3>Deleted Successfully</h3>
+     <div id="tempMsg">Deleted Successfully</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
     {{/if}}
-    {{!-- {{#if dmsg2}}
+    {{#if dmsg2}}
     <h3>No such data found</h3>
-    {{/if}} --}}
+    {{/if}}
     <br>
     </form>
   </div>
-  {{!-- <script>
-    const back = document.getElementById('back');
-    back.addEventListener("click",function(){
-        window.location.href="http://localhost:8005/index"
-    })
-</script> --}}
 </body>
 </html>

@@ -5,49 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="search.css">
 </head>
 <body>
+      <button class="back-home" id="back">&#8592;</button>
     <div class="container">
-      <form action="/searchstudent"  >
-   <h3>SEARCH STUDENT</h3>
+      <form  action="/searchstudent"  >
+   <h3 style="color: rgb(16, 18, 161);">SEARCH STUDENT</h3>
    
     <hr>
  
-   <label for="rollno"><b>Roll No</b></label>
-    <input type="text" placeholder="Enter Rollno To Search" name="rollno" id="rollno" required>
+   <label for="rollno"><b>Roll No: </b></label>
+    <input type="text" placeholder=" Enter Rollno To Search" name="rollno" id="rollno" required>
 
-    <button type="submit" class="registerbtn">SEARCH STUDENT</button>
-     <button class="back-home" id="back">
-    <a href="./TeacherPage">&#8592;</a>
+    <button type="submit" id="registerbtn">SEARCH STUDENT</button>
     </button>
 
     {{#if msg1}}
     {{#data}}
     <h3>student found</h3>
-    <p>Details of the student:</p>
-    <p>Name:{{Name}}</p>
-    <p>RollNumber:{{RollNumber}}</p>
-    
-    {{#if CGPA}}
-      <p>CGPA:{{CGPA}}</p>
-    {{else}}
-      <p>CGPA: <b>Marks need to be alloted</b></p>
-    {{/if}}
+    <p><b>Details of the student:</b></p>
+    <p><b>Name: </b>{{Name}}</p>
+    <p><b>RollNumber: </b>{{RollNumber}}</p>
+    <p><b>Year: </b>{{Year}}</p>
     {{/data}}
     {{/if}}
   
-    {{#if msg2}}
-    <h3>student not found</h3>
+    {{#if msg2}}  
+    <div id="tempMsg">Student not found</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
     {{/if}}
     <br>
     </form>
   </div>
-  {{!-- <script>
-    const back = document.getElementById('back');
-    back.addEventListener("click",function(){
-        window.location.href="http://localhost:8005/index"
-    })
-</script> --}}
+
+<script>
+        const backBtn = document.getElementById('back');
+        backBtn.addEventListener('click',()=>{
+            window.location.href='./TeacherPage'
+        })
+    </script>
 </body>
 </html>

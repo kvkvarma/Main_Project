@@ -6,7 +6,7 @@ thead{
 tbody{
     text-align: center;
 }
-h3{
+h3,h5{
     text-align: center;
 }
 .container{
@@ -53,7 +53,7 @@ h6{
    top:10px;
    border:none;
    width:40px;
-   border-radius: 1px; 
+   border-radius: 4px; 
 }
 #formmm{
     display: flex;
@@ -85,19 +85,16 @@ h6{
 #sub{
     display: flex;
 }
-.text_field{
-    height:30px;
-    width: 20px;
-    margin-right: 5px;
-    margin-top: 25px;
-    margin-left: 4px;
-}
 .buttonSubmit{
     height: 30px;
-    margin-top: 25px;
+    margin-top: 5px;
     margin-left: 5px;
     background-color: green;
     color:white;
     border: none;
     border-radius: 3px;
+}
+textarea{
+    margin-top: -8px;
+    margin-left: 70px;
 }

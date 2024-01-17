@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add</title>
-    {{!-- <link rel="stylesheet" href="style.css"> --}}
     <link rel="stylesheet" href="./add.css">
     
 </head>
@@ -20,18 +19,18 @@
     </script>
     <div class="container">
     <form method="post" action="/addstudent"  >
-   <h3>ADD STUDENT</h3>
+   <h3 style="color: rgb(16, 18, 161);">ADD STUDENT</h3>
     <label for="name"><b>Student name:</b></label>
-    <input type="text" placeholder="Enter Name" style="color:black;" name="name" id="name" required>
+    <input type="text" placeholder=" Enter Name" style="color:black;" name="name" id="name" required>
     <br>
     <label for="roll no"><b>Roll No:</b></label>
-    <input type="text" placeholder="Enter RollNo" name="rollno" id="rollno" required>
+    <input type="text" placeholder=" Enter RollNo" name="rollno" id="rollno" required>
 <br>
     <label for="password"><b>Temporary Password:</b></label>
-    <input type="text" placeholder="Enter password" name="password" id="password" required>
+    <input type="text" placeholder=" Enter password" name="password" id="password" required>
 <br>
     <label for="year"><b>Year:</b></label>
-    <select class="select" name="year">
+    <select class="select" name="year" required>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -40,7 +39,7 @@
     </select>
 <br>
     <label for="branch"><b>Branch:</b></label>
-    <input type="text" placeholder="Enter branch" name="branch" id="branch" required>
+    <input type="text" placeholder=" Enter branch" name="branch" id="branch" required>
 <br>
     <button type="submit" id="registerbtn">ADD STUDENT</button>
 <br>

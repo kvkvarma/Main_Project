@@ -16,13 +16,15 @@ h2{
     text-align: center;
 }
 #back{
-    float: left;
-    margin-top: -330px;
+    margin-left: 10px;
+    margin-top: 10px;
+    width:40px;
+    height: 25px;
     background-color: maroon;
     border: none;
     color:white;
     border-radius: 4px;
-}
+    }
 .number{
     text-align: center;
     margin-top: 10px;

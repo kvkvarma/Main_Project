@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./Report.css">
 </head>
 <body>
+   <button  id="back">&#8592;</button>
 {{#if msg}}
 <div class="number-div">
 <p class="number">Number Of Queries: {{noOfQueries}}</p>
@@ -38,7 +39,7 @@
 </table>
 </div>
 {{else}}
-<h2>No Report To Resolve.....</h2>
+<h2>No Reports To Resolve.....</h2>
 {{/if}}
 
     <script>
@@ -53,9 +54,6 @@
         })
 
     </script>
-    <div class="btn">
- <button  id="back">&#8592;</button>
-  </div>
   <script>
     const back = document.getElementById('back');
     back.addEventListener("click",function(){

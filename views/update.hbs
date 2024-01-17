@@ -5,58 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update</title>
-   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="update.css">
 </head>
 <body>
+    {{#if removeMsg}}
+    <button class="back-home" id="back">&#8592;</button>
+        <button id="reportClicked">Reports</button>
     <div class="search-container">
-   <form action="/updatesearch" class="form-class">
-   <h3 style="color: black;">SEARCH STUDENT</h3>
+   <form action="/updatesearch" >
+   <h3 style="color: rgb(16, 18, 161);">SEARCH STUDENT</h3>
     <hr>
-   <label for="rollno"><b style="color:black">Roll No</b></label>
-    <input type="text" placeholder="Enter Rollno To Search" name="rollno" style="width: 20%;display:block" id="rollno" required>
+   <label for="rollno"><b style="color:black">Roll No:</b></label>
+    <input type="text" placeholder=" Enter Rollno To Search" name="rollno"  id="rollno" required>
 
     <button type="submit" class="registerbtn">SEARCH STUDENT</button>   
-   <button class="back-home" id="back">
-    <a href="./TeacherPage">&#8592;</a>
-    </button>
 
     <br>
      {{#if umsg}}
-    <h2 style="color: black;">Details Updated Successfully</h2>
+     <div id="tempMsg">Details Updated Successfully</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
     {{/if}}
    {{#if msg2}}
-   <h2 style="color: black;">Data not found</h2>
+   <div id="tempMs">No Student Match</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMs');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
    {{/if}}
 
 </form>
+{{/if}}
 </div>
-
    {{#if msg1}}
+    <button class="back-home" id="back" ><a href="./TeacherPage">exit</a></button>
    <div class="container">
    <form action="/updatestudent" >
-   <h3>Update Student Details</h3>
+   <h3 style="color: rgb(16, 18, 161);">Update Student Details</h3>
    
     <hr>
    {{#data}}
-    <label for="name"><b>Student name</b></label>
+    <label for="name"><b>Student name:</b></label>
     <input type="text" placeholder="Enter Name" name="name" value="{{Name}}" id="name" required>
-    <label for="roll no"><b>Roll No</b></label>
+    <label for="roll no"><b>Roll No:</b></label>
     <input type="text" placeholder="Enter RollNo" name="rollno" value="{{RollNumber}}" id="rollno" required readonly>
-    {{!-- <label for="query"><b>Query Desc</b></label> --}}
-    {{!-- <input type="text" placeholder="Enter RollNo" name="query" value="{{Queries}}" id="query" > --}}
+    <label for="roll no"><b>Year:</b></label>
+    <input type="text" placeholder="Enter year" name="year" value="{{Year}}" id="year" required>
+     <label for="roll no"><b>Branch:</b></label>
+    <input type="text" placeholder="Enter branch" name="branch" value="{{Branch}}" id="branch" required>
     <button type="submit" class="registerbtn">Update Student</button>
    {{/data}}
-    <button class="back-home" id="back">
-    <a href="./TeacherPage">&#8592;</a>
-    </button>
    {{/if}}
 </form>
 </div>
-    <button id="reportClicked">Reports</button>
+
    <script>
         let reportBtn = document.getElementById('reportClicked');
         reportBtn.addEventListener('click',()=>{
             window.location.href = '/Report';
+        })
+           const backBtn = document.getElementById('back');
+        backBtn.addEventListener('click',()=>{
+            window.location.href='./TeacherPage'
         })
    </script>
    

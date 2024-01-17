@@ -36,7 +36,7 @@ app.get("/search",(req,res)=>{
     res.render("search");
 })
 app.get("/update",(req,res)=>{
-    res.render("update");
+    res.render("update",{removeMsg:true});
 })
 app.get("/delete",(req,res)=>{
     res.render("delete");
@@ -45,7 +45,7 @@ app.get('/view',(req,res)=>{
     res.render('view');
 })
 app.get("/AllotMarks",(req,res)=>{
-    res.render('AllotMarks')
+    res.render('AllotMarks',{idPage:true})
 })
  
 app.post("/student-submit", (req, res) => {
@@ -154,8 +154,8 @@ app.post("/addstudent", (req, res) => {
     });
 });
       
-app.post("/removestudent",(req,res)=>{
-    const {rollno} = req.body;
+app.get("/removestudent",(req,res)=>{
+    const {rollno} = req.query;
     let qry = 'delete from student where RollNumber = ?';
 
     mysql.query(qry,[rollno],(err,results)=>{
@@ -208,25 +208,25 @@ app.get("/searchstudent",(req,res)=>{
        }
        else{
           if(results.length>0){
-             res.render("update",{msg1:true,data:results})
+             res.render("update",{msg1:true,removeMsg:false,data:results})
           }
           else{
-             res.render("update",{msg2:true})
+             res.render("update",{msg2:true,removeMsg:true})
           }
        }
     })
  })
 
  app.get("/updatestudent",(req,res)=>{
-    const {name,rollno} = req.query;
-    let qry = "update student set Name=?,Queries=NULL where RollNumber = ?";
-    mysql.query(qry,[name,rollno],(err,results)=>{
+    const {name,rollno,year,branch} = req.query;
+    let qry = "update student set Name=?,Year=?,Branch=?,Queries=NULL where RollNumber = ?";
+    mysql.query(qry,[name,year,branch,rollno],(err,results)=>{
        if(err){
           throw err;
        }
        else {
           if(results.affectedRows>0){
-             res.render("update",{umsg:true});
+             res.render("update",{umsg:true,removeMsg:true});
           }
        }
     })
@@ -240,7 +240,13 @@ app.get('/viewClicked',(req,res)=>{
             throw err;
         }
         else{
-            res.render('view',{data:results,msg:true});
+            if(results.length>0){
+
+                res.render('view',{data:results,msg:true});
+            }
+            else{
+                res.render('view',{msg:false})
+            }
         }
     })
 })
@@ -262,9 +268,10 @@ app.get("/Report",(req,res)=>{
     })
 })
 
+
 app.get('/allotMarks-submit',(req,res)=>{
     const {roolno,sem} = req.query;
-    let qry = "select Name,Year,Branch,RollNumber from student where RollNumber=?";
+    let qry = "select * from student where RollNumber=?";
     mysql.query(qry,[roolno],(err,results)=>{
         if(err){
             throw err;
@@ -286,7 +293,7 @@ app.get("/marks-submit",(req,res)=>{
             res.render('AllotMarks',{MSmsg:true});
         }
     })
-})    
+})       
 
 app.listen(port,(err)=>{
     if(err){
