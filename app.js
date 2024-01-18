@@ -21,6 +21,9 @@ app.get("/",(req,res)=>{
 app.get("/studentResultPage",(req,res)=>{
     res.render("studentResultPage");
 })
+app.get("/updatePassword",(req,res)=>{
+    res.render("updatePassword");
+})
 
 app.get("/TeacherPage",(req,res)=>{
     res.render("TeacherPage");
@@ -65,7 +68,32 @@ app.post("/student-submit", (req, res) => {
         }
     });
 });
-
+ 
+app.get('/updatePass',(req,res)=>{
+    const{rollno,prevPassword,newPassword} = req.query;
+    let qry  = 'select*from student where RollNumber = ? and Password =?';
+    mysql.query(qry,[rollno,prevPassword],(err,results)=>{
+        if(err){
+            throw err;
+        }
+        else{
+            if(results.length>0){
+                let qry1 = 'update student set Password = ? where RollNumber = ?';
+                mysql.query(qry1,[newPassword,rollno],(err,updateresults)=>{
+                    if(err){
+                        throw err;
+                    }
+                    else if(updateresults.affectedRows>0){
+                        res.render('Homepage',{updatePassMsg:true})
+                    }
+                })
+            }
+        else{
+            res.render('Homepage',{notUpdated:true})
+        }
+        }
+    })
+})
 
 app.get('/clickedDone',(req,res)=>{
     const {number,sem} = req.query;
@@ -131,27 +159,35 @@ app.post("/teacher-submit",(req,res)=>{
 
 app.post("/addstudent", (req, res) => {
         const { name, rollno, password, year, branch } = req.body;
-        let qry = 'INSERT INTO student (Name, RollNumber, Password, Year, Branch) VALUES (?, ?, ?, ?, ?)';
-        mysql.query(qry, [name, rollno, password, year, branch], (err, results) => {
-          if (err) {
-            throw err;
-          } else {
-            const semesterTables = ['semester', 'semester2','semester3','semester4','semester5','semester6','semester7','semester8'];
-            semesterTables.forEach((table,index)=>{
-                let qry1 = `insert into ${table} (RollNumber) values (?)`  ;
-                mysql.query(qry1,[rollno],(err,results)=>{
-                    if(err){
-                        throw err;
-                    }
-                    else{
-                        if(index === semesterTables.length-1){
-                            res.render('add',{addmsg:true})
-                        }
-                    }
-                })
-            })
-        }
-    });
+        let qry2 = 'Select * from student where RollNumber = ?';
+        mysql.query(qry2,[rollno],(err,results)=>{
+            if(results.length==0){
+                let qry = 'INSERT INTO student (Name, RollNumber, Password, Year, Branch) VALUES (?, ?, ?, ?, ?)';
+                mysql.query(qry, [name, rollno, password, year, branch], (err, results) => {
+                    if (err) {
+                      throw err;
+                    } else {
+                      const semesterTables = ['semester', 'semester2','semester3','semester4','semester5','semester6','semester7','semester8'];
+                      semesterTables.forEach((table,index)=>{
+                          let qry1 = `insert into ${table} (RollNumber) values (?)`  ;
+                          mysql.query(qry1,[rollno],(err,results)=>{
+                              if(err){
+                                  throw err;
+                              }
+                              else{
+                                  if(index === semesterTables.length-1){
+                                      res.render('add',{addmsg:true})
+                                  }
+                              }
+                          })
+                      })
+                  }
+              });
+            }
+            else{
+                res.render('add',{alreadyPresent:true})
+            }
+        })
 });
       
 app.get("/removestudent",(req,res)=>{
@@ -162,7 +198,7 @@ app.get("/removestudent",(req,res)=>{
         if(err){
             throw err;
         }
-        else{
+        else if(results.affectedRows>0){
             const semesterTables = ['semester', 'semester2','semester3','semester4','semester5','semester6','semester7','semester8'];
             semesterTables.forEach((table,index)=>{
                 let qry1 = `delete  from ${table} where RollNumber = ?`;
@@ -177,6 +213,9 @@ app.get("/removestudent",(req,res)=>{
                     }
                 })
             })
+        }
+        else{
+            res.render('delete',{dmsg2:true})
         }
     })
 })
@@ -277,7 +316,20 @@ app.get('/allotMarks-submit',(req,res)=>{
             throw err;
         }
         else{
-            res.render('AllotMarks',{data:results,allotmsg:true,semister:sem})
+            if(results.length>0){
+            let qry2 = ' select * from ?? where RollNumber = ?';
+            mysql.query(qry2,[sem,roolno],(err,marksDetails)=>{
+                if(err){
+                    throw err;
+                }
+                else{
+                    res.render('AllotMarks',{data:results,allotmsg:true,semister:sem,idPage:false,marksdata:marksDetails})
+                }
+            }) 
+            }
+            else{
+                res.render('AllotMarks',{idPage:true,noData:true})
+            }
         }
     })
 })
@@ -290,7 +342,15 @@ app.get("/marks-submit",(req,res)=>{
             throw err;
         }
         else{
-            res.render('AllotMarks',{MSmsg:true});
+            let qry2 = 'update student set Queries=NULL where RollNumber = ?';
+            mysql.query(qry2,[roolno],(err,results)=>{
+                if(err){
+                    throw err;
+                }
+                else{
+                    res.render('AllotMarks',{MSmsg:true,idPage:true});
+                }
+            })
         }
     })
 })       

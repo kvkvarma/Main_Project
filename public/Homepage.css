@@ -62,5 +62,26 @@ input{
     border: none;
     border-radius: 2px;
     margin-left: 177px;
-    /* margin-top: 40px; */ 
+}
+#updatepass{
+    background-color: rgb(14, 154, 209);
+    margin-top:-30px;
+    height: 30px;
+    border-radius: 2px;
+    border: none;
+    color: white;
+    margin-left: -43px;
+    margin-bottom: 5px;
+}
+button{
+    cursor: pointer;
+}
+#tempMsg{
+    margin-top: 5px;
+    text-align: center;
+    margin-top: -40px;
+}
+#tempMs{
+    text-align: center;
+    margin-top: -40px;
 }

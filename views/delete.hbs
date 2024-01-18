@@ -33,7 +33,13 @@
                 </script>
     {{/if}}
     {{#if dmsg2}}
-    <h3>No such data found</h3>
+    <div id="tempMsg">No Data Found</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
     {{/if}}
     <br>
     </form>

@@ -13,11 +13,22 @@
         <div class="form-class1">
             <form method="post" action="student-submit" class="student-form">
             <h2>Student Login</h2>
-                <label class="top-input" for="username">Roll Num: <input type="text" name="username" id="username" placeholder=" Enter Username"></label>
+                <label style="margin-left:16px ;" class="top-input" for="username"><b>Roll No:   </b><input type="text" name="username" id="username" placeholder=" Enter Roll Number" required></label>
                 <br>
-                <label for="password">Password: <input type="password" placeholder=" Enter Password" name="password" id="password"></label>
+                <label for="password"><b>Password:  </b> <input type="password" placeholder=" Enter Password" name="password" id="password" required></label>
                 <br>
-            {{#if msg}}
+           
+                <button class="login-btn" type="submit">Login</button>
+                 <button id="updatepass">Update Password</button>
+                 
+            <script>
+                let updateBtn = document.getElementById('updatepass');
+                updateBtn.addEventListener('click',()=>{
+                    window.location.href = './updatePassword'
+                })
+            </script>
+            </form>
+             {{#if msg}}
                 <div id="tempMsg">Invalid Details</div>
                 <script>
                     var tempMsg = document.getElementById('tempMsg');
@@ -26,29 +37,44 @@
                     }, 1000);
                 </script>
             {{/if}}
-                <button class="login-btn" type="submit">Login</button>
-            </form>
+            
+                {{#if updatePassMsg}}
+                <div id="tempMsg">Password Updated Succesfully</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
+                {{/if}}
+                {{#if notUpdated}}
+                <div id="tempMsg">Invalid User Tried</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
+                {{/if}}
         </div>
         <div class="form-class2">
             <form method="post" action="teacher-submit" class="teacher-form">
                 <h2>Teacher Login</h2>
-                <label class="top-input" for="username">Username: <input type="text" name="username" id="username" placeholder=" Enter Username"> </label>
+                <label class="top-input" for="username"><b>Username: </b><input type="text" name="username" id="username" placeholder=" Enter Username" required> </label>
                 <br>
-                <label for="password">Password: <input type="password" placeholder=" Enter Password" name="password" id="password"></label>
+                <label for="password"><b>Password: </b><input type="password" placeholder=" Enter Password" name="password" id="password" required></label>
                 <br>
+                <button  class="login-btn" type="submit">Login</button>
+            </form>
                 {{#if msgg}}
-                    <div id="tempMsg">
-                        <p>Invalid Details</p>
-                    </div>
+                    <div id="tempMs">Invalid Details</div>
                     <script>
-                        var tempMsg = document.getElementById('tempMsg');
+                        var tempMsg = document.getElementById('tempMs');
                         setTimeout(function () {
                             tempMsg.style.display = 'none';
                         }, 1000);
                     </script>
                 {{/if}}
-                <button  class="login-btn" type="submit">Login</button>
-            </form>
         </div>
     </div>
 </body>

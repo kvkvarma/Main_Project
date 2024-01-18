@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./AllotMarks.css">
+<link rel="stylesheet" href="./allotmarks.css">
 </head>
 <body>
-
+   <button class="back-home" id="back">&#8592;</button>
+  {{#if idPage}}
+   <button id="reportClicked">Reports</button>
+  <div class="container">
    <form action="allotMarks-submit">
-    <label for="number">RollNumber: <input class="number-field" type="text" name="roolno" id="roolno"></label>
-    <p>Select Semester: </p>
-    
+    <h3 style="color: rgb(16, 18, 161);">ALLOT MARKS</h3>
+    <label for="number"><b>Roll Number:</b></label>
+       <input placeholder=" Enter Roll Number" class="number-field" type="text" name="roolno" id="roolno">
+    <div class="semister"><b>Semester:</b></div>
     <select class="select" name="sem">
       <option value="semester">Semester 1</option>
       <option value="semester2">Semester 2</option>
@@ -22,44 +26,69 @@
       <option value="semester7">Semester 7</option>
       <option value="semester8">Semester 8</option>
     </select>
-    <button class="subBtn" type="submit">Submit</button>
+     <button class="subBtn" type="submit">Submit</button>
+    {{#if noData}}
+     <div id="tempMsg"> No Data</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
+    {{/if}}
+     {{#if MSmsg}}
+     <div id="tempMs">Successfully Inserted</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMs');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
+    {{/if}}
+   
   </form> 
+  </div>
+  {{/if}}
 
     {{#if allotmsg}}
-    <p>Allot Marks:</p>
+    <div class="container">
     <form action="marks-submit">
+    <h3 style="color: rgb(16, 18, 161);"  >ALLOT MARKS</h3>
       <input type="hidden" name="sem" id="sem" value="{{semister}}">
     {{#data}}
         <input type="hidden" name="roolno" value={{RollNumber}} id="roolno" readonly>
-        <label for="maths">Maths</label>
-        <input type="number" name="maths" id="maths">
-
-        <label for="physics">Physics</label>
-        <input type="number" name="physics" id="physics">
-
-        <label for="chemistry">Chemistry</label>
-        <input type="number" name="chemistry" id="chemistry">
-
-        <label for="CGPA">CGPA</label>
-        <input type="number" name="CGPA" id="CGPA">
-
-        <button type="submit">submit</button>
     {{/data}}
-    </form>
+    {{#marksdata}}
+        <label for="maths"><b>Maths:</b></label>
+        <input placeholder=" Enter Maths" type="number" value={{Maths}} name="maths" id="maths">
 
-    {{/if}}
-    {{#if MSmsg}}
-    <p>Successfully Inserted</p>
+        <label for="physics"><b>Physics:</b></label>
+        <input type="number" placeholder=" Enter Physics" value={{Physics}} name="physics" id="physics">
+
+        <label for="chemistry"><b>Chemistry:</b></label>
+        <input type="number" placeholder=" Enter Chemistry" value={{Chemistry}} name="chemistry" id="chemistry">
+
+        <label for="CGPA"><b>CGPA:</b></label>
+        <input type="number" placeholder=" Enter CGPA" value={{CGPA}} name="CGPA" id="CGPA">
+      {{/marksdata}}
+
+        <button class="doneBtn" type="submit">submit</button>
+    </form>
+</div>
     {{/if}}
 
     <div class="btn">
- <button class="back-home" id="back">&#8592;</button>
+
   </div>
   <script>
     const back = document.getElementById('back');
     back.addEventListener("click",function(){
         window.location.href="/TeacherPage"
     })
+     let reportBtn = document.getElementById('reportClicked');
+        reportBtn.addEventListener('click',()=>{
+            window.location.href = './Report';
+        })
 </script>
 </body>
 </html> 

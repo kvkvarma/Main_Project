@@ -39,14 +39,34 @@
     </select>
 <br>
     <label for="branch"><b>Branch:</b></label>
-    <input type="text" placeholder=" Enter branch" name="branch" id="branch" required>
+     <select class="select" name="branch">
+      <option value="CSE">CSE</option>
+      <option value="ECE">ECE</option>
+      <option value="MECH">MECh</option>
+      <option value="EEE">EEE</option>
+    </select>
 <br>
     <button type="submit" id="registerbtn">ADD STUDENT</button>
 <br>
     {{#if addmsg}}
-        <h3>Data Inserted</h3>
-    
+       <div id="tempMsg">Data Inserted</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
     {{/if}}
+    {{#if alreadyPresent}}
+        <div id="tempMsg">Data Already Present</div>
+                <script>
+                    var tempMsg = document.getElementById('tempMsg');
+                    setTimeout(function () {
+                        tempMsg.style.display = 'none';
+                    }, 1000);
+                </script>
+    {{/if}}
+
 </form>
 </div>
 </body>
